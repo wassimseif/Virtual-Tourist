@@ -2,8 +2,8 @@
 //  MapManager.swift
 //  VirtualTourist
 //
-//  Created by André Servidoni on 10/25/15.
-//  Copyright © 2015 Udacity. All rights reserved.
+//  Created by Wassim Seifeddine on 4/18/16.
+//  Copyright © 2016 Wassim Seifeddine. All rights reserved.
 //
 
 import Foundation
