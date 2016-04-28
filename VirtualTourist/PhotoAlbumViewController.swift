@@ -243,29 +243,32 @@ class PhotoAlbumViewController: BaseViewController, UICollectionViewDataSource, 
                 return
             }
             
-            if let response = photos as? [[String:AnyObject]] {
-                
-                if response.isEmpty {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.endLoading(false)
-                    }
-                } else {
+            dispatch_async(dispatch_get_main_queue(), { 
+                if let response = photos as? [[String:AnyObject]] {
                     
-                    let _ = response.map() { (item: [String : AnyObject]) -> Photo in
-                        let photo = Photo(content: item, context: self.sharedContext)
+                    if response.isEmpty {
                         
-                        photo.pin = self.pin
-                        return photo
-                    }
-                    
-                    self.pin.pagesOfPhotos = pages
-                    self.saveContext()
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.endLoading(true)
+                            self.endLoading(false)
+                        
+                    } else {
+                        
+                        let _ = response.map() { (item: [String : AnyObject]) -> Photo in
+                            let photo = Photo(content: item, context: self.sharedContext)
+                            
+                            photo.pin = self.pin
+                            return photo
+                        }
+                        
+                        self.pin.pagesOfPhotos = pages
+                        self.saveContext()
+                        
+                        
+                            self.endLoading(true)
+                        
                     }
                 }
-            }
+            })
+          
         }
     }
     
